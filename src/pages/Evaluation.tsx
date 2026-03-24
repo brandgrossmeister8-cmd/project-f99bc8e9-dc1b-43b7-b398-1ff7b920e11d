@@ -42,15 +42,7 @@ const Evaluation = () => {
 
   if (!currentGame) { navigate('/select'); return null; }
 
-  const sorted = useMemo(() => {
-    let pts = [...currentGame.contactPoints];
-    if (filterZone !== 'all') pts = pts.filter(p => p.zone === filterZone);
-    if (filterStage !== 'all') pts = pts.filter(p => p.stageId === filterStage);
-    return pts.sort((a, b) => b.totalScore - a.totalScore);
-  }, [currentGame.contactPoints, filterZone, filterStage]);
-
-  const selected = currentGame.contactPoints.find(p => p.id === selectedId) || sorted[0];
-  const evaluatedCount = currentGame.contactPoints.filter(p => Object.values(p.scores).some(Boolean)).length;
+  // hooks moved above early return
 
   const handleNext = () => {
     setStage('rescue');
