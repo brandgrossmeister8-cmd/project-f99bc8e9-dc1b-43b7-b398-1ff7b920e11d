@@ -28,20 +28,20 @@ const Results = () => {
   const navigate = useNavigate();
   const { currentGame, resetGame } = useGameStore();
 
-  if (!currentGame) { navigate('/select'); return null; }
-
-  const top3 = useMemo(() => getTop3Critical(currentGame.contactPoints), [currentGame.contactPoints]);
+  const top3 = useMemo(() => currentGame ? getTop3Critical(currentGame.contactPoints) : [], [currentGame?.contactPoints]);
 
   const zoneCounts = useMemo(() => {
+    if (!currentGame) return [];
     const counts: Record<Zone, number> = { red: 0, orange: 0, yellow: 0, green: 0, unscored: 0 };
     currentGame.contactPoints.forEach(p => counts[p.zone]++);
     return Object.entries(counts)
       .filter(([, v]) => v > 0)
       .map(([zone, count]) => ({ name: ZONE_LABELS[zone as Zone], value: count, fill: ZONE_COLORS[zone as Zone] }));
-  }, [currentGame.contactPoints]);
+  }, [currentGame?.contactPoints]);
 
-  const stageData = useMemo(() =>
-    JOURNEY_STAGES.map(s => {
+  const stageData = useMemo(() => {
+    if (!currentGame) return [];
+    return JOURNEY_STAGES.map(s => {
       const pts = currentGame.contactPoints.filter(p => p.stageId === s.id);
       const avg = pts.length ? pts.reduce((sum, p) => sum + p.totalScore, 0) / pts.length : 0;
       return { name: s.name, points: pts.length, avgScore: Math.round(avg * 10) / 10 };
