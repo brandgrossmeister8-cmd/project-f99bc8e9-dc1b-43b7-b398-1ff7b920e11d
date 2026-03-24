@@ -23,15 +23,17 @@ const GamePlay = () => {
     [currentGame?.businessId]
   );
 
+  const pointsByStage = useMemo(() => JOURNEY_STAGES.map(s => ({
+    stage: s,
+    points: currentGame?.contactPoints.filter(p => p.stageId === s.id) || [],
+  })), [currentGame?.contactPoints]);
+
+  const totalPoints = currentGame?.contactPoints.length || 0;
+  const canProceed = totalPoints >= MIN_POINTS;
+
   if (!currentGame) { navigate('/select'); return null; }
 
-  const pointsByStage = JOURNEY_STAGES.map(s => ({
-    stage: s,
-    points: currentGame.contactPoints.filter(p => p.stageId === s.id),
-  }));
-
-  const totalPoints = currentGame.contactPoints.length;
-  const canProceed = totalPoints >= MIN_POINTS;
+  const hints = business?.hints || {};
 
   const handleAdd = (stageId: string) => {
     const val = inputs[stageId]?.trim();
