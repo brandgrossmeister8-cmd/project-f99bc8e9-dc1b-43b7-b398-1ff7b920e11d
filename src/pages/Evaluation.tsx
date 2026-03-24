@@ -42,18 +42,11 @@ const Evaluation = () => {
 
   if (!currentGame) { navigate('/select'); return null; }
 
-  // hooks moved above early return
 
   const handleNext = () => {
     setStage('rescue');
     navigate('/rescue');
   };
-
-  const zoneCounts = useMemo(() => {
-    const counts: Record<string, number> = { red: 0, orange: 0, yellow: 0, green: 0, unscored: 0 };
-    currentGame.contactPoints.forEach(p => counts[p.zone]++);
-    return counts;
-  }, [currentGame.contactPoints]);
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
