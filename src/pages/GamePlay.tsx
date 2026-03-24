@@ -55,7 +55,6 @@ const GamePlay = () => {
     navigate('/evaluate');
   };
 
-  const hints = business?.hints || {};
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
