@@ -13,6 +13,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Inter", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },
       colors: {
@@ -38,6 +39,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        chess: {
+          dark: "hsl(var(--chess-dark))",
+          light: "hsl(var(--chess-light))",
+          gold: "hsl(var(--chess-gold))",
+          "gold-soft": "hsl(var(--chess-gold-soft))",
+          cream: "hsl(var(--chess-cream))",
+        },
         zone: {
           red: "hsl(var(--zone-red))",
           orange: "hsl(var(--zone-orange))",
@@ -58,6 +66,7 @@ export default {
         "slide-in": { from: { opacity: "0", transform: "translateX(-12px)" }, to: { opacity: "1", transform: "translateX(0)" } },
         "scale-in": { from: { opacity: "0", transform: "scale(0.95)" }, to: { opacity: "1", transform: "scale(1)" } },
         "pulse-zone": { "0%,100%": { opacity: "1" }, "50%": { opacity: "0.7" } },
+        "chess-move": { "0%": { transform: "translateY(0)" }, "50%": { transform: "translateY(-4px)" }, "100%": { transform: "translateY(0)" } },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -66,6 +75,7 @@ export default {
         "slide-in": "slide-in 0.3s ease-out",
         "scale-in": "scale-in 0.3s ease-out",
         "pulse-zone": "pulse-zone 2s ease-in-out infinite",
+        "chess-move": "chess-move 2s ease-in-out infinite",
       },
     },
   },

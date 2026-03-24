@@ -13,11 +13,11 @@ export interface CustomerJourneyStage {
 }
 
 export const JOURNEY_STAGES: CustomerJourneyStage[] = [
-  { id: 'attraction', name: 'Привлечение', description: 'Как клиент узнаёт о вас', icon: '📢', order: 0 },
-  { id: 'first_contact', name: 'Первый контакт', description: 'Первое взаимодействие', icon: '👋', order: 1 },
-  { id: 'purchase', name: 'Покупка', description: 'Процесс покупки', icon: '💳', order: 2 },
-  { id: 'delivery', name: 'Получение', description: 'Получение услуги/продукта', icon: '📦', order: 3 },
-  { id: 'return', name: 'Возврат', description: 'Возврат и рекомендация', icon: '🔄', order: 4 },
+  { id: 'attraction', name: 'Привлечение', description: 'Как клиент узнаёт о вас', icon: '\u2659', order: 0 },
+  { id: 'first_contact', name: 'Первый контакт', description: 'Первое взаимодействие', icon: '\u2658', order: 1 },
+  { id: 'purchase', name: 'Покупка', description: 'Процесс покупки', icon: '\u2657', order: 2 },
+  { id: 'delivery', name: 'Получение', description: 'Получение услуги/продукта', icon: '\u2656', order: 3 },
+  { id: 'return', name: 'Возврат', description: 'Возврат и рекомендация', icon: '\u2655', order: 4 },
 ];
 
 export interface EvaluationCriterion {
@@ -106,11 +106,21 @@ export function getZoneLabel(zone: Zone): string {
 
 export function getZoneColor(zone: Zone): string {
   switch (zone) {
-    case 'red': return '#DC3545';
-    case 'orange': return '#FD7E14';
-    case 'yellow': return '#FFC107';
-    case 'green': return '#28A745';
-    default: return '#9CA3AF';
+    case 'red': return '#1a1a1a';
+    case 'orange': return '#5c5c5c';
+    case 'yellow': return '#c8a45c';
+    case 'green': return '#8a8a8a';
+    default: return '#bfbfbf';
+  }
+}
+
+export function getZoneSymbol(zone: Zone): string {
+  switch (zone) {
+    case 'red': return '\u265A';
+    case 'orange': return '\u265B';
+    case 'yellow': return '\u265C';
+    case 'green': return '\u265D';
+    default: return '\u265F';
   }
 }
 

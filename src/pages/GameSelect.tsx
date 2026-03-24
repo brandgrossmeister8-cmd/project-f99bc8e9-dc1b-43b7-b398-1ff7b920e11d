@@ -19,7 +19,7 @@ const GameSelect = () => {
   );
 
   const handleSelect = (b: typeof BUSINESSES[0]) => {
-    if (!b.isFree) return; // paywall
+    if (!b.isFree) return;
     startGame('solo', b.id, b.name, b.problem);
     navigate('/play');
   };
@@ -33,7 +33,10 @@ const GameSelect = () => {
       <header className="border-b border-border bg-card/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container flex items-center h-14 gap-4">
           <Button variant="ghost" size="icon" onClick={() => navigate('/')}><ArrowLeft className="w-4 h-4" /></Button>
-          <h1 className="font-bold text-foreground">Выберите бизнес</h1>
+          <div className="flex items-center gap-2">
+            <span className="text-lg">&#9812;</span>
+            <h1 className="font-display font-bold text-foreground">Выберите бизнес</h1>
+          </div>
         </div>
       </header>
 
@@ -43,7 +46,7 @@ const GameSelect = () => {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input placeholder="Поиск по названию или категории..." className="pl-10" value={search} onChange={e => setSearch(e.target.value)} />
           </div>
-          <Button variant="outline" className="gap-2" onClick={handleCustom}>
+          <Button variant="outline" className="gap-2 font-display border-chess-dark/20 hover:border-chess-gold" onClick={handleCustom}>
             <Plus className="w-4 h-4" /> Свой бизнес
           </Button>
         </div>
@@ -52,7 +55,7 @@ const GameSelect = () => {
           {filtered.map((b, i) => (
             <Card
               key={b.id}
-              className={`p-5 cursor-pointer hover:shadow-lg transition-all animate-fade-in relative ${!b.isFree ? 'opacity-70' : ''}`}
+              className={`chess-card p-5 cursor-pointer animate-fade-in relative ${!b.isFree ? 'opacity-60' : ''}`}
               style={{ animationDelay: `${i * 50}ms` }}
               onClick={() => handleSelect(b)}
             >
@@ -62,12 +65,12 @@ const GameSelect = () => {
                 </div>
               )}
               <div className="text-3xl mb-3">{b.emoji}</div>
-              <h3 className="font-semibold text-foreground mb-1">{b.name}</h3>
-              <p className="text-sm text-muted-foreground mb-2">{b.description}</p>
-              <Badge variant="destructive" className="text-xs">{b.problem}</Badge>
+              <h3 className="font-display font-semibold text-foreground mb-1">{b.name}</h3>
+              <p className="text-sm text-muted-foreground mb-3">{b.description}</p>
+              <Badge className="text-xs bg-chess-dark text-chess-light">{b.problem}</Badge>
               <div className="flex items-center gap-2 mt-3">
-                <Badge variant="secondary" className="text-xs">{b.category}</Badge>
-                {b.isFree && <Badge variant="outline" className="text-xs">Бесплатно</Badge>}
+                <Badge variant="secondary" className="text-xs font-mono">{b.category}</Badge>
+                {b.isFree && <Badge variant="outline" className="text-xs border-chess-gold/40 text-chess-gold">Бесплатно</Badge>}
               </div>
             </Card>
           ))}

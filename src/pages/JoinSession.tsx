@@ -19,26 +19,28 @@ const JoinSession = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center">
-      <Card className="p-8 w-full max-w-sm mx-4">
+    <div className="min-h-screen bg-background flex items-center justify-center relative">
+      <div className="absolute inset-0 chess-pattern-subtle opacity-20" />
+      <Card className="chess-card p-8 w-full max-w-sm mx-4 relative">
         <Button variant="ghost" size="icon" className="mb-4" onClick={() => navigate('/')}><ArrowLeft className="w-4 h-4" /></Button>
-        <h1 className="text-xl font-bold text-foreground mb-6">Присоединиться к сессии</h1>
+        <div className="text-3xl mb-4">&#9822;</div>
+        <h1 className="text-xl font-display font-bold text-foreground mb-6">Присоединиться к сессии</h1>
         <div className="space-y-4">
           <div>
-            <Label>Код сессии</Label>
+            <Label className="font-display">Код сессии</Label>
             <Input
-              placeholder="Например: ABC123"
-              className="text-center font-mono text-lg uppercase tracking-widest"
+              placeholder="ABC123"
+              className="text-center font-mono text-lg uppercase tracking-[0.3em]"
               maxLength={6}
               value={code}
               onChange={e => setCode(e.target.value.toUpperCase())}
             />
           </div>
           <div>
-            <Label>Название команды</Label>
+            <Label className="font-display">Название команды</Label>
             <Input placeholder="Введите название вашей команды" value={teamName} onChange={e => setTeamName(e.target.value)} />
           </div>
-          <Button className="w-full gap-2" onClick={handleJoin}>
+          <Button className="w-full gap-2 bg-chess-dark text-chess-light hover:bg-chess-dark/90 font-display" onClick={handleJoin}>
             <LogIn className="w-4 h-4" /> Присоединиться
           </Button>
         </div>
