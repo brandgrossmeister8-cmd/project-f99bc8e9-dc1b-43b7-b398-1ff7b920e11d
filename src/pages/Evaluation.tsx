@@ -23,6 +23,23 @@ const Evaluation = () => {
   const [filterZone, setFilterZone] = useState<Zone | 'all'>('all');
   const [filterStage, setFilterStage] = useState<string>('all');
 
+  const sorted = useMemo(() => {
+    if (!currentGame) return [];
+    let pts = [...currentGame.contactPoints];
+    if (filterZone !== 'all') pts = pts.filter(p => p.zone === filterZone);
+    if (filterStage !== 'all') pts = pts.filter(p => p.stageId === filterStage);
+    return pts.sort((a, b) => b.totalScore - a.totalScore);
+  }, [currentGame?.contactPoints, filterZone, filterStage]);
+
+  const selected = currentGame?.contactPoints.find(p => p.id === selectedId) || sorted[0];
+  const evaluatedCount = currentGame?.contactPoints.filter(p => Object.values(p.scores).some(Boolean)).length || 0;
+
+  const zoneCounts = useMemo(() => {
+    const counts: Record<string, number> = { red: 0, orange: 0, yellow: 0, green: 0, unscored: 0 };
+    currentGame?.contactPoints.forEach(p => counts[p.zone]++);
+    return counts;
+  }, [currentGame?.contactPoints]);
+
   if (!currentGame) { navigate('/select'); return null; }
 
   const sorted = useMemo(() => {
