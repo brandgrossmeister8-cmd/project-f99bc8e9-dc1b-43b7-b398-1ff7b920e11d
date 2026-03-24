@@ -33,9 +33,9 @@ const RescuePlan = () => {
     }
   }, []);
 
-  if (!currentGame) { navigate('/select'); return null; }
+  const business = useMemo(() => currentGame?.businessId ? BUSINESSES.find(b => b.id === currentGame.businessId) : null, [currentGame?.businessId]);
 
-  const business = currentGame.businessId ? BUSINESSES.find(b => b.id === currentGame.businessId) : null;
+  if (!currentGame) { navigate('/select'); return null; }
 
   const handleFinish = () => {
     updateRescuePlan(plans);
