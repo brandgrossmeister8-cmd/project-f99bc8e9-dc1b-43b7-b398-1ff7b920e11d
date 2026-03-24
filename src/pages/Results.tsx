@@ -45,9 +45,10 @@ const Results = () => {
       const pts = currentGame.contactPoints.filter(p => p.stageId === s.id);
       const avg = pts.length ? pts.reduce((sum, p) => sum + p.totalScore, 0) / pts.length : 0;
       return { name: s.name, points: pts.length, avgScore: Math.round(avg * 10) / 10 };
-    }),
-    [currentGame.contactPoints]
-  );
+    });
+  }, [currentGame?.contactPoints]);
+
+  if (!currentGame) { navigate('/select'); return null; }
 
   const handlePlayAgain = () => { resetGame(); navigate('/select'); };
 
